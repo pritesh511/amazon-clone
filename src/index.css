@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 body {
+  background-color: rgb(234, 237, 237);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -22,4 +23,5 @@ code {
   --white-color: #ffffff;
   --dark-color: #333333;
   --search-button: #febd69;
+  --yellow-color: #f0c14b;
 }

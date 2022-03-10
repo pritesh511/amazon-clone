@@ -8,6 +8,7 @@ const HeaderWrapper = styled.div`
   background-color: var(--header-Bg);
   position: sticky;
   top: 0;
+  z-index: 999;
 `;
 const AppLogo = styled.div`
   width: 118px;
