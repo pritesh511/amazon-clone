@@ -15,13 +15,16 @@ import {
   HeaderBasket,
   ItemSpan,
 } from "./Styles";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <HeaderWrapper>
-      <AppLogo>
-        <LogoImg />
-      </AppLogo>
+      <Link to="/">
+        <AppLogo>
+          <LogoImg />
+        </AppLogo>
+      </Link>
       <Searchwrapper>
         <SearchInput></SearchInput>
         <SearchButton>
@@ -41,10 +44,12 @@ const Header = () => {
           <HeadUpSpan>Your</HeadUpSpan>
           <HeadBottomSpan>Prime</HeadBottomSpan>
         </HeaderOption>
-        <HeaderBasket>
-          <ShoppingBasketIcon />
-          <ItemSpan>0</ItemSpan>
-        </HeaderBasket>
+        <Link to="/checkout">
+          <HeaderBasket>
+            <ShoppingBasketIcon />
+            <ItemSpan>0</ItemSpan>
+          </HeaderBasket>
+        </Link>
       </HeaderMenu>
     </HeaderWrapper>
   );
