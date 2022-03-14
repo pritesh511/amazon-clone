@@ -5,6 +5,7 @@ const CheckoutMain = styled.div`
   margin: 8px;
   background-color: var(--white-color);
   display: flex;
+  align-items: flex-start;
   border: 1px solid #e4e4e5;
 `;
 const CheckOutLeft = styled.div`
@@ -28,16 +29,54 @@ const Checkouthead = styled.h3`
 const CheckProduct = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 12px 16px;
 `;
 const CheckOutItem = styled.div`
   display: flex;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid black;
 `;
 const ProductDetail = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1 1 0;
+  padding: 12px 16px;
+  button {
+    background-color: var(--yellow-color);
+    padding: 6px 8px;
+    margin-top: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #111;
+    border: 1px solid;
+    border-color: #a88734 #9c7e31;
+    margin-right: auto;
+  }
 `;
-const Description = styled.p``;
-const Price = styled.span``;
+const Description = styled.p`
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #000;
+`;
+const Price = styled.span`
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #000;
+`;
+const CheckOutImage = styled.div`
+  border-radius: 8px;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
 
 export {
   CheckoutMain,
@@ -49,4 +88,5 @@ export {
   ProductDetail,
   Description,
   Price,
+  CheckOutImage,
 };

@@ -17,10 +17,11 @@ const addItemReducers = (state = InitialState, action) => {
         ],
       };
     case "REMOVE_ITEM":
+      const newData = state.data.filter(
+        (item) => item.id !== action.payload.id
+      );
       return {
-        ...state,
-        value: state.value - 1,
-        id: state.numId + 1,
+        data: newData,
       };
     default:
       return state;

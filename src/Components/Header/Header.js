@@ -16,8 +16,11 @@ import {
   ItemSpan,
 } from "./Styles";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const productNum = useSelector((state) => state.addItemReducers);
+  const itemNum = productNum.data.length;
   return (
     <HeaderWrapper>
       <Link to="/">
@@ -47,7 +50,7 @@ const Header = () => {
         <Link to="/checkout">
           <HeaderBasket>
             <ShoppingBasketIcon />
-            <ItemSpan>0</ItemSpan>
+            <ItemSpan>{itemNum}</ItemSpan>
           </HeaderBasket>
         </Link>
       </HeaderMenu>
