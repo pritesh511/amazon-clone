@@ -1,8 +1,8 @@
-export const addItem = (id, description, price, rating, image) => {
+export const addItem = (description, price, rating, image) => {
   return {
     type: "ADD_ITEM",
     payload: {
-      id: id,
+      id: new Date().getTime().toString(),
       description: description,
       price: price,
       rating: rating,
@@ -11,8 +11,11 @@ export const addItem = (id, description, price, rating, image) => {
   };
 };
 
-export const removeItem = () => {
+export const removeItem = (id) => {
   return {
     type: "REMOVE_ITEM",
+    payload: {
+      id: id,
+    },
   };
 };
