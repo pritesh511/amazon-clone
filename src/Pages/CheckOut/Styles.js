@@ -25,7 +25,19 @@ const Checkouthead = styled.h3`
   padding-bottom: 16px;
   border-bottom: 1px solid #e4e4e5;
 `;
-const CheckProduct = styled.div``;
+const CheckProduct = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const CheckOutItem = styled.div`
+  display: flex;
+`;
+const ProductDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const Description = styled.p``;
+const Price = styled.span``;
 
 export {
   CheckoutMain,
@@ -33,4 +45,8 @@ export {
   CheckOutRight,
   Checkouthead,
   CheckProduct,
+  CheckOutItem,
+  ProductDetail,
+  Description,
+  Price,
 };

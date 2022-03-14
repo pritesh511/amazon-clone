@@ -10,9 +10,12 @@ import {
   ProductUpper,
   ProductImg,
 } from "./Styles";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../Actions/addItem";
 
 const Product = (props) => {
-  const { description, price, rating, image } = props;
+  const { id, description, price, rating, image } = props;
+  const dispatch = useDispatch();
   return (
     <>
       <ProductBox>
@@ -29,7 +32,13 @@ const Product = (props) => {
         </ProductUpper>
         <ProductBottom>
           <ProductImg src={image}></ProductImg>
-          <button>Add to cart</button>
+          <button
+            onClick={() =>
+              dispatch(addItem(id, description, price, rating, image))
+            }
+          >
+            Add to cart
+          </button>
         </ProductBottom>
       </ProductBox>
     </>
