@@ -62,6 +62,9 @@ const HeaderMenu = styled.div`
   display: flex;
   align-self: center;
   margin-left: 16px;
+  a {
+    text-decoration: none;
+  }
 `;
 const HeaderOption = styled.div`
   display: flex;

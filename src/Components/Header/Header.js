@@ -17,10 +17,24 @@ import {
 } from "./Styles";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { auth } from "../../firebase";
 
 const Header = () => {
   const productNum = useSelector((state) => state.addItemReducers);
   const itemNum = productNum.data.length;
+  const user = useSelector((state) => state.authReducers);
+  const handleAuth = () => {
+    if (user) {
+      auth.signOut();
+    }
+  };
+  function authHandler() {
+    if (user.user === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
   return (
     <HeaderWrapper>
       <Link to="/">
@@ -35,10 +49,14 @@ const Header = () => {
         </SearchButton>
       </Searchwrapper>
       <HeaderMenu>
-        <HeaderOption>
-          <HeadUpSpan>Hello, Guest</HeadUpSpan>
-          <HeadBottomSpan>Account & List</HeadBottomSpan>
-        </HeaderOption>
+        <Link to={!authHandler() && "/signup"}>
+          <HeaderOption onClick={handleAuth}>
+            <HeadUpSpan>Hello, Guest</HeadUpSpan>
+            <HeadBottomSpan>
+              {authHandler() ? "Sign Out" : "Sign In"}
+            </HeadBottomSpan>
+          </HeaderOption>
+        </Link>
         <HeaderOption>
           <HeadUpSpan>Returns</HeadUpSpan>
           <HeadBottomSpan>& Orders</HeadBottomSpan>
