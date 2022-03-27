@@ -33,7 +33,9 @@ const Product = (props) => {
         <ProductBottom>
           <ProductImg src={image}></ProductImg>
           <button
-            onClick={() => dispatch(addItem(description, price, rating, image))}
+            onClick={() =>
+              dispatch(addItem(description, price, rating, image, rating))
+            }
           >
             Add to cart
           </button>

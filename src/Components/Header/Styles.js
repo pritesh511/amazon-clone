@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
-  height: 60px;
+  /* height: 60px; */
   padding: 8px 12px;
   display: flex;
   align-items: center;
@@ -9,6 +9,7 @@ const HeaderWrapper = styled.div`
   position: sticky;
   top: 0;
   z-index: 999;
+  flex-wrap: wrap;
 `;
 const AppLogo = styled.div`
   width: 118px;
