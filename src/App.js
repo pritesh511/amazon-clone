@@ -10,6 +10,7 @@ import { setAuth } from "./Actions/auth";
 import Payment from "./Pages/Payment/Payment";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import Orders from "./Pages/Orders/Orders";
 
 const promise = loadStripe(
   "pk_test_51Kh3jlSHwgDA0oUl0IBI0sre2p0jFC8m55MWkfI8h1d8kIx03hIWN32vqmJcXmuVZrffFYi2lhi5AAkZq7TnlePG009euyWok3"
@@ -46,6 +47,10 @@ function App() {
           </Route>
           <Route exact={true} path="/signup">
             <SignUp />
+          </Route>
+          <Route exact={true} path="/orders">
+            <Header />
+            <Orders />
           </Route>
         </Switch>
       </Router>

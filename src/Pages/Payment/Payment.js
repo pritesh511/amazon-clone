@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeItem } from "../../Actions/addItem";
 import StarIcon from "@mui/icons-material/Star";
+import axios from "axios";
 import {
   PaymentWrapper,
   AdressMain,
@@ -22,22 +23,55 @@ import {
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../../Reducers/addItemReducers";
+import { useHistory } from "react-router-dom";
 
 const Payment = () => {
-  // const [error, setError] = useState(null);
-  // const [disable, setDisable] = useState(true);
+  const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(true);
+  const [succeeded, setSucceede] = useState(false);
+  const [processing, setProcessing] = useState("");
+  const [client, setClient] = useState(true);
   const dispatch = useDispatch();
   const ItemNumber = useSelector((state) => state.addItemReducers);
   const ItemNum = ItemNumber.data.length;
   const user = useSelector((state) => state.authReducers);
   const products = useSelector((state) => state.addItemReducers);
-  // const stripe = useStripe();
-  // const elements = useElements();
-  // const handleSubmit = (e) => {};
-  // const handleChange = (e) => {
-  //   // setDisable(e.empty);
-  //   // setError(e.error ? e.error.message : "");
-  // };
+  const stripe = useStripe();
+  const elements = useElements();
+  const history = useHistory();
+
+  useEffect(() => {
+    const getClient = async () => {
+      const response = await axios({
+        method: "post",
+        url: `/payment/create?total=${getBasketTotal(ItemNumber.data) * 100}`,
+      });
+      setClient(response.data.client);
+    };
+    getClient();
+  }, [ItemNumber.data]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setProcessing(true);
+    const payload = await stripe
+      .confirmCardPayment(client, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      })
+      .then(({ paymentIntent }) => {
+        setSucceede(true);
+        setError(null);
+        setProcessing(false);
+        history.replace("/orders");
+      });
+  };
+
+  const handleChange = (e) => {
+    setDisabled(e.empty);
+    setError(e.error ? e.error.message : "");
+  };
   return (
     <>
       <PaymentWrapper>
@@ -84,8 +118,8 @@ const Payment = () => {
         <AllItemWrapper>
           <PaymentTitle>Payment:</PaymentTitle>
           <PaymentMethodWrap>
-            <form>
-              <CardElement />
+            <form onSubmit={handleSubmit}>
+              <CardElement onChange={handleChange} />
               <CurrencyFormat
                 renderText={(value) => (
                   <>
@@ -101,6 +135,14 @@ const Payment = () => {
                 thousandSeparator={true}
                 prefix={"$"}
               />
+              <button
+                disabled={processing || disabled || succeeded}
+                onClick={() => history.push("/orders")}
+              >
+                <span>{processing ? <p>Processsing</p> : "Buy Now"}</span>
+              </button>
+
+              {error && <div>{error}</div>}
             </form>
           </PaymentMethodWrap>
         </AllItemWrapper>
