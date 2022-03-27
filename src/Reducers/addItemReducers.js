@@ -1,5 +1,8 @@
 const InitialState = { data: [] };
 
+export const getBasketTotal = (basket) =>
+  basket?.reduce((amount, item) => item.price + amount, 0);
+
 const addItemReducers = (state = InitialState, action) => {
   switch (action.type) {
     case "ADD_ITEM":

@@ -51,7 +51,9 @@ const Header = () => {
       <HeaderMenu>
         <Link to={!authHandler() && "/signup"}>
           <HeaderOption onClick={handleAuth}>
-            <HeadUpSpan>Hello, Guest</HeadUpSpan>
+            <HeadUpSpan>
+              Hello, <span>{user.user ? user.user.email : "Guest"}</span>
+            </HeadUpSpan>
             <HeadBottomSpan>
               {authHandler() ? "Sign Out" : "Sign In"}
             </HeadBottomSpan>
